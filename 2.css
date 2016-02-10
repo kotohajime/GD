@@ -1,0 +1,52 @@
+#main2{
+  /*height:0px;*/
+  
+  /*max-width:2000px;*/
+  /*display:none;←間に合わんかた、画像解像度下げても*/
+}
+#main2>div{
+  margin:auto;
+  width:100%;
+}
+#raul{
+  margin:auto;
+  width:100%;
+  padding-left:0px;
+  margin:auto;
+  
+}
+.rali{
+  opacity:0;
+  position:relative;
+  top:-1200px;
+  
+  width:1040px;
+  margin:auto;
+  overflow:hidden;
+  background-size:cover;
+  margin-bottom:10px;
+}
+.rali a{
+  color:white;
+  font-size:70px;
+    
+  
+  vertical-align:bottom;
+}
+#ue{
+  background-image:url("image/top1.png");
+  background-position:0px 0px;
+}
+#naka{
+  background-image:url("image/top2.png");
+  background-position:0px -233px;
+}
+#sita{
+  background-image:url("image/top3.png");
+  background-position:0px -466px;
+}
+#sita a{
+  
+  line-height:100%;
+  
+}

@@ -1,0 +1,479 @@
+#joubu3{
+  height:47px;
+  background-color:white;
+  margin:auto;
+  position:fixed;
+  border-bottom:1px solid rgba(0,0,0,0.05);
+  overflow:hidden;
+  z-index:1000;
+}
+#joubutool3{
+  width:0%;
+  height:46px;
+  border-bottom:1px solid rgba(0,0,0,0.15);
+  overflow:hidden;
+  z-index:1000;
+}
+#return{
+  overflow:hidden;
+}
+
+#main3{
+  width:0%;
+  height:100%;
+  margin:auto;
+  background-color:#f5f8fa;
+  overflow:hidden;
+  font-family:Arial,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",Osaka,"メイリオ",Meiryo,"ＭＳ Ｐゴシック","MS PGothic",sans-serif;
+}
+#maintw{
+  width:1192px;
+  height:100%;
+  padding:56px 14px 15px;
+  margin:auto;
+  overflow:hidden;
+}
+
+#twleft{
+  float:left;
+}
+#twleftue{
+  background-color:#fff;
+  border:1px solid #e1e8ed;
+  border-radius:5px;
+  width:288px;
+  
+  margin-bottom:10px;
+  border-radius:5px;
+  overflow:hidden;
+}
+
+#headerimage{
+  width:288px;
+  height:96px;
+  cursor:pointer;
+}
+#icontutumi{
+  width:72px;
+  height:75px;
+  background-color:white;
+  border-radius:6px;
+  margin-top:-30px;
+  margin-left:8px;
+  padding-top:3px;
+  padding-right:1px;
+  padding-left:1px;
+  display:inline-block;
+  text-align:center;
+}
+#imagename img{
+  width:68px;
+  cursor:pointer;
+  border-radius:7px;
+}
+#akaka{
+  display:inline-block;
+  padding-left:8px;
+}
+#hutoaka{
+  font-size:18px;
+  font-weight:700;
+  line-height:21px;
+  cursor:pointer;
+}
+#hutoaka:hover{
+  text-decoration:underline;
+}
+#hosoaka{
+  font-size:12px;
+  color:#66757f;
+  cursor:pointer;
+}
+#hosoaka:hover{
+  text-decoration:underline;
+}
+#followers{
+  padding-top:7px;
+}
+#followers ul{
+  margin:0px;
+  padding:0px;
+  padding-bottom:2px;
+  width:100%;
+  position:relative;
+  top:-5px;
+}
+
+.twfl{
+  display:inline-block;
+  
+  text-align:center;
+  width:33%;
+  cursor:pointer;
+}
+
+.twmoji{
+  font-size:10px;
+  color:#8899a6;
+  cursor:pointer;
+}
+.twkazu{
+  font-size:18px;
+  color:#00008B;
+  padding-top:3px;
+  cursor:pointer;
+}
+#twleftsita{
+  background-color:#fff;
+  border:1px solid #e1e8ed;
+  border-radius:5px;
+  width:258px;
+  height:223px;
+  padding:15px;
+  margin-bottom:10px;
+}
+
+#twleftsita ul{
+  margin:0px;
+  margin-left:4px;
+  padding-left:0px;
+}
+#toredai{
+  color:#66757f;
+  font-size:18px;
+  font-weight:300;
+  height:28px;
+  line-height:25px;
+}
+.torend{
+  color:#00008B;
+  font-size:13px;
+  line-height:13px;
+  margin-bottom:7px;
+}
+.torend span{
+  cursor:pointer;
+}
+.torend span:hover{
+  text-decoration:underline;
+}
+
+#twright{
+  float:left;
+  width:290px;
+}
+#twrightue{
+ background-color:#fff;
+ border:1px solid #e1e8ed;
+ border-radius:5px;
+ width:288px;
+ /*height:225px;*/
+ margin-bottom:10px;
+}
+#padright{
+  padding:15px;
+  border-bottom:1px solid #e1e8ed;
+}
+#osusume{
+  margin-bottom:10px;
+}
+#osusume h3{
+  margin:0px;
+  display:inline;
+  font-size:18px;
+  font-weight:300;
+  color:#66757f;
+}
+#osusume span{
+  font-size:12px;
+  color:#00008B;
+  
+}
+.osuao{
+  cursor:pointer;
+}
+
+#osusume span:hover{
+  text-decoration:underline;
+}
+.osuaka{
+  position:relative;
+  margin-top:10px;
+}
+.osuimg{
+  position:absolute;
+  left:-3px;
+  width:48px;
+  border-radius:5px;
+  cursor:pointer;
+}
+.osu1{
+  color:#292f33;
+  font-weight:bold;
+  font-size:14px;
+  cursor:pointer;
+}
+.osu1:hover{
+  text-decoration:underline;
+}
+.osu2{
+  font-size:13px;
+  color:#8899a6;
+  margin-left:3px;
+  cursor:pointer;
+}
+.followbutton{
+  margin-left:58px;
+  margin-top:4px;
+}
+.flbutton{
+  position:relative;
+  font-family:Arial,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",Osaka,"メイリオ",Meiryo,"ＭＳ Ｐゴシック","MS PGothic",sans-serif;
+  font-weight:bold;
+  border-radius:4px;
+  border:1px solid #e1e8ed;
+  background-color:#f5f8fa;
+  background-image:linear-gradient(#fff,#f5f8fa);
+  font-size:13px;
+  cursor:pointer;
+  height:30px;
+  width:100px;
+  outline:none;
+}
+.flbutton:focus{
+  outline:none;
+}
+.flbutton2:focus{
+  outline:none;
+}
+.flbutton::-moz-focus-inner,.flbutton2::-moz-focus-inner{
+  border:0;
+}
+.flbutton2{
+  position:relative;
+  font-family:Arial,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",Osaka,"メイリオ",Meiryo,"ＭＳ Ｐゴシック","MS PGothic",sans-serif;
+  font-weight:bold;
+  border-radius:4px;
+  border:1px solid #e1e8ed;
+  background-color:#3ea2dc;
+  background-image:none;
+  font-size:13px;
+  cursor:pointer;
+  height:30px;
+  width:100px;
+  color:#fff;
+  outline:none;
+}
+
+.flbutton span{
+  position:relative;
+  left:6px;
+}
+.fbutton{
+  position:relative;
+  top:2px;
+  
+  width:18px;
+}
+#siriai{
+  padding:15px;
+  height:20px;
+  background-color:#f5f8fa;
+  font-size:12px;
+  color:#00008B;
+  border-radius:5px;
+}
+#siriai span{
+  cursor:pointer;
+}
+#siriai span:hover{
+  text-decoration:underline;
+}
+
+#twrightsita{
+  background-color:#fff;
+  border:1px solid #e1e8ed;
+  border-radius:5px;
+  width:288px;
+  height:120px;
+  margin-bottom:10px;
+}
+#twrsitapa{
+  padding:15px;
+  text-align:center;
+    background-color:#fff;
+}
+
+.mu{
+  color:#8899a6;
+  font-size:12px;
+}
+
+#twcenter{
+  float:left;
+  width:590px;
+  height:100%;
+  margin:0 10px;
+  
+}
+#toukouran{
+  width:588px;
+  height:58px;
+  border:1px solid;
+  border-bottom:0px;
+  border-radius:5px 5px 0 0;
+  border-color:#BFBFE2 !important;
+  background-color:#E5E5F3;
+  overflow:hidden;
+  cursor:text;
+}
+#forpad{
+  padding:10px 12px;
+  height:38px;
+  line-height:38px;
+  position:relative;
+}
+
+#toukouimage{
+  position:absolute;
+  width:32px;
+  left:28px;
+  top:13px;
+  border-radius:4px;
+}
+
+#toukoudiv{
+  background-color:white;
+  display:inline-block;
+  width:506px;
+  height:36px;
+  font-size:14px;
+  color:#00008B;
+  margin-left:56px;
+  vertical-align:top;
+  border:1px solid #BFBFE2;
+  border-radius:3px;
+  line-height:36px;
+}
+
+#toukoudiv span{
+  margin-left:10px;
+}
+
+#timeline{
+  width:590px;
+  height:100%;
+}
+
+#sintyaku{
+  width:588px;
+  height:0px;
+  background-color:#f5f8fa;
+  border-left:1px solid #e1e8ed;
+  border-right:1px solid #e1e8ed;
+  border-bottom:1px solid #e1e8ed;
+  border-top:1px solid #e1e8ed;
+  color:#00008B;
+  font-size:13px;
+  text-align:center;
+  line-height:38px;
+  cursor:pointer;
+}
+#sintyaku:hover{
+  background-color:#e1e8ed;
+}
+
+#tl{
+  width:588px;
+  height:100%;
+  background-color:#fff;
+  border-left:1px solid #e1e8ed;
+  border-right:1px solid #e1e8ed;
+}
+#tlul{
+  margin:0px;
+  padding:0px;
+}
+.tweet{
+  position:relative;
+  border-bottom:1px solid #e1e8ed;
+  cursor:pointer;
+}
+.tweet:hover{
+  background-color:#f5f8fa;
+}
+.twpad{
+  padding:9px 12px;
+}
+.twnusi{
+  width:48px;
+  position:absolute;
+  left:10px;
+  top:10px;
+  border-radius:5px;
+  
+}
+.twaka{
+  height:19px;
+  margin-left:58px;
+}
+.hutoi{
+  color:#292f33;
+  font-weight:bold;
+  font-size:14px;
+}
+.hosoi{
+  font-size:13px;
+  color:#8899a6;
+  margin-left:3px;
+}
+.time{
+  font-size:13px;
+  color:#8899a6;
+  margin-left:3px;
+}
+.naiyou{
+  height:100%;
+  margin-left:58px;
+  margin-top:3px;
+  margin-bottom:8px;
+  font-size:14px;
+  line-height:18px;
+  color:#292f33;
+}
+.kakusyu{
+  height:22px;
+  margin-left:58px;
+}
+.kakusyu span{
+  display:inline-block;
+  width:89px;
+  vertical-align:text-top;
+}
+.kakusyu img{
+  width:19px;
+}
+.rep img{
+  width:15px;
+  margin-top:1px;
+}
+
+.retw{
+  
+}
+.retw span{
+  color:#8899a6;
+  display:inline;
+  font-size:12px;
+  font-weight:bold;
+  line-height:10px;
+  margin-left:9px;
+}
+.twlike span{
+  color:#8899a6;
+  display:inline;
+  font-size:12px;
+  font-weight:bold;
+  line-height:10px;
+  margin-left:9px;
+}

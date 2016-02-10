@@ -1,0 +1,26 @@
+#main5{
+  width:0%;
+  height:100%;
+  margin:auto;
+  /*background-color:#e9eaed;*/
+  padding-top:200px;
+  overflow:hidden;
+}
+#munen{
+  text-align:center;
+  
+}
+
+#joubu5{
+  width:0%;
+  height:42px;
+  background-color:#3a5795;
+  /*-webkit-box-shadow:rgba(0, 0, 0, 0.52);*/
+  margin:auto;
+  position:fixed;
+  border-bottom:solid 1px #133783;
+  overflow:hidden;
+}
+#joubu5 img{
+  width:42px;
+}

@@ -1,0 +1,58 @@
+body{
+  margin:0px;
+  font-family:"Helvetica Neue","HelveticaNeue",Helvetica,Arial,sans-serif;
+}
+#main1{
+  padding-top:200px;
+  
+  
+}
+#syodai{
+  max-width:500px;
+  margin:auto;
+}
+#non{
+  opacity:0;
+}
+
+ul{
+  list-style:none;
+}
+#tou{
+  opacity:0;
+  font-size:50px;
+}
+
+.answer{
+  opacity:0;
+  font-size:25px;
+  margin-bottom:40px;
+}
+
+a:visited{
+  color:black;
+}
+a:link{
+  text-decoration:none;
+}
+
+#fix{
+  position:fixed;
+  font-size:200px;
+  width:1000px;
+  top:50px;
+  left:100px;
+}
+
+.aoric{
+  margin:auto;
+}
+
+#non{
+  text-align:center;
+  font-size:30px;
+  padding-top:30px;
+}
+#non textarea,button{
+  font-size:20px;
+}
