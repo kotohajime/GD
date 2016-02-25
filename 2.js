@@ -50,7 +50,7 @@ var ralimove = function(){
       "height":"689px",
       "border-radius":"5px"
     });
-    $("a",this).text("囀");
+    $("a",this).text("twitter");
   }else if(id == "naka"){
     $("#ue,#sita").css("display","none");
     $(this).css({
@@ -58,7 +58,7 @@ var ralimove = function(){
       "background-position":"0px 0px",
       "border-radius":"5px"
     });
-    $("a",this).text("転");
+    $("a",this).text("tumblr");
   }else{
     $("#naka,#ue").css("display","none");
     $(this).css({
@@ -66,7 +66,7 @@ var ralimove = function(){
       "background-position":"0px 0px",  
       "border-radius":"5px"
     });
-    $("a",this).text("顔");
+    $("a",this).text("facebook");
   }
   $("a",this).css({
       "display":"block",
