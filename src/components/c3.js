@@ -6,7 +6,7 @@ var SecondChild = React.createClass({
   render:function(){
     return(
       <div className="pussy">
-        <h2>pussy...</h2>
+        <h2>we are 35.</h2>
       </div>
     );
   }
