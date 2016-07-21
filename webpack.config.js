@@ -2,7 +2,7 @@ var webpack = require("webpack");
 
 module.exports = {
   entry:{
-    client:"./src/try.js"
+    client:"./src/cnvrgnc.js"
   },
   output:{
     filename:"main.js",
