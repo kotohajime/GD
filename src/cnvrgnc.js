@@ -6,6 +6,7 @@ var RootComponent = c1.component;
 console.log(c1.string);
 console.log(c1.childstring);
 console.log(c1.chichistring);
+console.log("git");
 
 
 ReactDOM.render(
