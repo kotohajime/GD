@@ -5,7 +5,7 @@ module.exports = {
     client:"./src/cnvrgnc.js"
   },
   output:{
-    filename:"main.js",
+    filename:"rumblr.js",
     path:"./public"
   },
   module:{
