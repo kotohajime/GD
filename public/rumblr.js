@@ -49,23 +49,38 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(33);
 
-	var TumblrRoot = React.createClass({
-	  displayName: "TumblrRoot",
+	var PostComponent = React.createClass({
+	  displayName: "PostComponent",
 
 	  render: function render() {
 	    return React.createElement(
 	      "div",
-	      { className: "root" },
-	      React.createElement(
-	        "h1",
-	        null,
-	        "このページはこれから構築されますね"
-	      )
+	      { className: "post", type: this.props.type },
+	      this.props.children
 	    );
 	  }
 	});
 
-	ReactDOM.render(React.createElement(TumblrRoot, null), document.getElementById("main"));
+	var TumblrRoot = React.createClass({
+	  displayName: "TumblrRoot",
+
+	  render: function render() {
+	    var postNodes = this.props.data.map(function (node) {
+	      return React.createElement(
+	        PostComponent,
+	        { type: node.type },
+	        node.id
+	      );
+	    });
+	    return React.createElement(
+	      "div",
+	      { className: "root" },
+	      postNodes
+	    );
+	  }
+	});
+
+	ReactDOM.render(React.createElement(TumblrRoot, { data: data }), document.getElementById("main"));
 
 /***/ },
 /* 1 */
