@@ -56,7 +56,11 @@
 	    return React.createElement(
 	      "div",
 	      { className: "root" },
-	      "hi!!"
+	      React.createElement(
+	        "h1",
+	        null,
+	        "このページはこれから構築されますね"
+	      )
 	    );
 	  }
 	});

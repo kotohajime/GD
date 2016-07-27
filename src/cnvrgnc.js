@@ -5,7 +5,7 @@ var TumblrRoot = React.createClass({
   render:function(){
     return(
       <div className="root">
-        hi!!
+        <h1>このページはこれから構築されますね</h1>
       </div>
     );
   }
