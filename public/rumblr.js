@@ -49,6 +49,18 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(33);
 
+	var PhotoComponent = React.createClass({
+	  displayName: "PhotoComponent",
+
+	  render: function render() {
+	    return React.createElement(
+	      "div",
+	      { className: "photo" },
+	      React.createElement("img", { className: "min-photo", src: this.props.url })
+	    );
+	  }
+	});
+
 	var PostComponent = React.createClass({
 	  displayName: "PostComponent",
 
@@ -66,12 +78,33 @@
 
 	  render: function render() {
 	    var postNodes = this.props.data.map(function (node) {
-	      return React.createElement(
-	        PostComponent,
-	        { type: node.type },
-	        node.id
-	      );
+	      if (node.type == "photo") {
+	        return React.createElement(PhotoComponent, { type: node.type, url: node["photo-url-1280"] });
+	      } else {
+	        return React.createElement(
+	          PostComponent,
+	          { type: node.type },
+	          node.id
+	        );
+	      }
 	    });
+	    /*
+	    var postNodes;
+	    if(this.props.data.type == "photo"){
+	      postNodes = this.props.data.map(function(node){
+	        return(
+	          <PhotoComponent type={node.type} url={node.photo-url-500} />
+	        );
+	      });
+	    }else{
+	      postNodes = this.props.data.map(function(node){
+	        return(
+	          <PostComponent type={node.type}>
+	            {node.id}
+	          </PostComponent>
+	        );
+	      });
+	    }*/
 	    return React.createElement(
 	      "div",
 	      { className: "root" },
@@ -80,7 +113,38 @@
 	  }
 	});
 
-	ReactDOM.render(React.createElement(TumblrRoot, { data: data }), document.getElementById("main"));
+	var RenderFunc = function RenderFunc() {
+	  ReactDOM.render(React.createElement(TumblrRoot, { data: data }), document.getElementById("main"));
+	};
+
+	var requestFunc = function requestFunc(n) {
+	  var request = new XMLHttpRequest();
+	  request.open("GET", blogURL + "page/" + pagenumber + "/?format=json", true);
+	  request.onreadystatechange = function () {
+	    if (request.readyState == 4 && request.status == 200) {
+	      var begining = request.response.search("{");
+	      var shaveB = request.response.substr(begining);
+	      var shaveL = shaveB.substr(0, shaveB.length - 1);
+	      var happy = JSON.parse(shaveL);
+	      for (var i = 0; i < happy.posts.length; i++) {
+	        data.push(happy.posts[i]);
+	      }
+	      console.log(data);
+	      console.log(pagenumber);
+	      pagenumber++;
+	      console.log(pagenumber);
+	      RenderFunc();
+	    }
+	  };
+	  request.send(null);
+	};
+	requestFunc(pagenumber);
+
+	var button = document.getElementById("update");
+	console.log(button);
+	button.addEventListener("click", function () {
+	  requestFunc(pagenumber);
+	}, false);
 
 /***/ },
 /* 1 */
