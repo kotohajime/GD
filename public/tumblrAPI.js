@@ -1,5 +1,7 @@
 var reactSrc = "http://static.tumblr.com/d1rkenh/xWLoayya4/rumblr.js";
 
+
+
 var requestFunc = function(n){
   var request = new XMLHttpRequest();
   request.open("GET",blogURL+"page/"+pagenumber+"/?format=json",true);
@@ -24,8 +26,13 @@ var requestFunc = function(n){
   };
   request.send(null);
 };
-
 requestFunc(pagenumber);
 
-var html = document.querySelector("html");
-var body = document.querySelector("body");
+
+
+var button = document.getElementById("update");
+console.log(button);
+button.addEventListener("click",function(){
+  requestFunc(pagenumber);
+},false);
+
