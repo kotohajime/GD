@@ -11,6 +11,22 @@ var PhotoComponent = React.createClass({
   }
 });
 
+var QuoteComponent = React.createClass({
+  render:function(){
+    /*
+    var parser = new DOMParser();
+    var text = parser.parseFromString(this.props.children,"application/xml");
+    */
+    //↑ReactではDOMParserによる脱文字列処理は行えない。怒られる...。
+    //var text = JSON.parse(this.props.children);
+    return(
+      <div className="quote">
+        <div className="min-quote">{this.props.children}</div>
+      </div>
+    );
+  }
+});
+
 var PostComponent = React.createClass({
   render:function(){
     return(
@@ -26,7 +42,13 @@ var TumblrRoot = React.createClass({
     var postNodes = this.props.data.map(function(node){
       if(node.type == "photo"){
         return(
-          <PhotoComponent type={node.type} url={node["photo-url-1280"]} />
+          <PhotoComponent type={node.type} url={node["photo-url-500"]} />
+        );
+      }else if(node.type == "quote"){
+        return(
+          <QuoteComponent type={node.type}>
+            {node["quote-text"]}
+          </QuoteComponent>
         );
       }else{
         return(
@@ -36,23 +58,6 @@ var TumblrRoot = React.createClass({
         );
       }
     });
-    /*
-    var postNodes;
-    if(this.props.data.type == "photo"){
-      postNodes = this.props.data.map(function(node){
-        return(
-          <PhotoComponent type={node.type} url={node.photo-url-500} />
-        );
-      });
-    }else{
-      postNodes = this.props.data.map(function(node){
-        return(
-          <PostComponent type={node.type}>
-            {node.id}
-          </PostComponent>
-        );
-      });
-    }*/
     return(
       <div className="root">
         {postNodes}
@@ -77,6 +82,7 @@ var requestFunc = function(n){
       var shaveB = request.response.substr(begining);
       var shaveL = shaveB.substr(0,shaveB.length-1);
       var happy = JSON.parse(shaveL);
+      console.log(happy);
       for(var i = 0;i<happy.posts.length;i++){
         data.push(happy.posts[i]);
       }
@@ -93,3 +99,4 @@ var button = document.getElementById("update");
 button.addEventListener("click",function(){
   requestFunc(pagenumber);
 },false);
+

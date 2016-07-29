@@ -61,6 +61,28 @@
 	  }
 	});
 
+	var QuoteComponent = React.createClass({
+	  displayName: "QuoteComponent",
+
+	  render: function render() {
+	    /*
+	    var parser = new DOMParser();
+	    var text = parser.parseFromString(this.props.children,"application/xml");
+	    */
+	    //↑ReactではDOMParserによる脱文字列処理は行えない。怒られる...。
+	    //var text = JSON.parse(this.props.children);
+	    return React.createElement(
+	      "div",
+	      { className: "quote" },
+	      React.createElement(
+	        "div",
+	        { className: "min-quote" },
+	        this.props.children
+	      )
+	    );
+	  }
+	});
+
 	var PostComponent = React.createClass({
 	  displayName: "PostComponent",
 
@@ -79,7 +101,13 @@
 	  render: function render() {
 	    var postNodes = this.props.data.map(function (node) {
 	      if (node.type == "photo") {
-	        return React.createElement(PhotoComponent, { type: node.type, url: node["photo-url-1280"] });
+	        return React.createElement(PhotoComponent, { type: node.type, url: node["photo-url-500"] });
+	      } else if (node.type == "quote") {
+	        return React.createElement(
+	          QuoteComponent,
+	          { type: node.type },
+	          node["quote-text"]
+	        );
 	      } else {
 	        return React.createElement(
 	          PostComponent,
@@ -88,23 +116,6 @@
 	        );
 	      }
 	    });
-	    /*
-	    var postNodes;
-	    if(this.props.data.type == "photo"){
-	      postNodes = this.props.data.map(function(node){
-	        return(
-	          <PhotoComponent type={node.type} url={node.photo-url-500} />
-	        );
-	      });
-	    }else{
-	      postNodes = this.props.data.map(function(node){
-	        return(
-	          <PostComponent type={node.type}>
-	            {node.id}
-	          </PostComponent>
-	        );
-	      });
-	    }*/
 	    return React.createElement(
 	      "div",
 	      { className: "root" },
@@ -126,6 +137,7 @@
 	      var shaveB = request.response.substr(begining);
 	      var shaveL = shaveB.substr(0, shaveB.length - 1);
 	      var happy = JSON.parse(shaveL);
+	      console.log(happy);
 	      for (var i = 0; i < happy.posts.length; i++) {
 	        data.push(happy.posts[i]);
 	      }
