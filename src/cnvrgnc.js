@@ -70,7 +70,7 @@ var RenderFunc = function(){
 
 var requestFunc = function(n){
   var request = new XMLHttpRequest();
-  request.open("GET",blogURL+"page/"+pagenumber+"/?format=json",true);
+  request.open("GET",blogURL+"page/"+n+"/?format=json",true);
   request.onreadystatechange = function(){
     if(request.readyState == 4 && request.status == 200){
       var begining = request.response.search("{");
@@ -81,9 +81,7 @@ var requestFunc = function(n){
         data.push(happy.posts[i]);
       }
       console.log(data);
-      console.log(pagenumber);
       pagenumber++;
-      console.log(pagenumber);
       RenderFunc();
     }
   };
@@ -92,7 +90,6 @@ var requestFunc = function(n){
 requestFunc(pagenumber);
 
 var button = document.getElementById("update");
-console.log(button);
 button.addEventListener("click",function(){
   requestFunc(pagenumber);
 },false);
