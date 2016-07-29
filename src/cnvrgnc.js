@@ -1,11 +1,29 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
 
+var setHeight = function(){
+  var html = document.querySelector("html");
+  var screen = html.clientHeight;
+  var post = document.querySelectorAll(".post");
+  for(var i = 0; i<post.length; i++){
+    post[i].style.height = screen+"px";
+  }
+  var mq = document.querySelectorAll(".min");
+  for(var o = 0;o<mq.length;o++){
+  var ki = screen-mq[o].clientHeight;
+  var ik = ki/2;
+  mq[o].style.paddingTop = ik + "px";
+  mq[o].style.paddingBottom = ik + "px";
+  }
+};
+
+window.onload = setHeight;
+
 var PhotoComponent = React.createClass({
   render:function(){
     return(
-      <div className="photo">
-        <img className="min-photo" src={this.props.url} />
+      <div className="photo post">
+        <img className="min-photo min" src={this.props.children} />
       </div>
     );
   }
@@ -20,8 +38,8 @@ var QuoteComponent = React.createClass({
     //↑ReactではDOMParserによる脱文字列処理は行えない。怒られる...。
     //var text = JSON.parse(this.props.children);
     return(
-      <div className="quote">
-        <div className="min-quote">{this.props.children}</div>
+      <div className="quote post">
+        <div className="min-quote min">{this.props.children}</div>
       </div>
     );
   }
@@ -42,7 +60,9 @@ var TumblrRoot = React.createClass({
     var postNodes = this.props.data.map(function(node){
       if(node.type == "photo"){
         return(
-          <PhotoComponent type={node.type} url={node["photo-url-500"]} />
+          <PhotoComponent type={node.type}>
+            {node["photo-url-500"]}
+          </PhotoComponent>
         );
       }else if(node.type == "quote"){
         return(
@@ -99,4 +119,5 @@ var button = document.getElementById("update");
 button.addEventListener("click",function(){
   requestFunc(pagenumber);
 },false);
+
 

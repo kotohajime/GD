@@ -49,14 +49,25 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(33);
 
+	var setHeight = function setHeight() {
+	  var html = document.querySelector("html");
+	  var screen = html.clientHeight;
+	  var post = document.querySelectorAll("post");
+	  for (var i = 0; i < post.length; i++) {
+	    post[i].style.height = screen + "px";
+	  }
+	};
+
+	window.onload = setHeight;
+
 	var PhotoComponent = React.createClass({
 	  displayName: "PhotoComponent",
 
 	  render: function render() {
 	    return React.createElement(
 	      "div",
-	      { className: "photo" },
-	      React.createElement("img", { className: "min-photo", src: this.props.url })
+	      { className: "photo post" },
+	      React.createElement("img", { className: "min-photo", src: this.props.children })
 	    );
 	  }
 	});
@@ -73,7 +84,7 @@
 	    //var text = JSON.parse(this.props.children);
 	    return React.createElement(
 	      "div",
-	      { className: "quote" },
+	      { className: "quote post" },
 	      React.createElement(
 	        "div",
 	        { className: "min-quote" },
@@ -101,7 +112,11 @@
 	  render: function render() {
 	    var postNodes = this.props.data.map(function (node) {
 	      if (node.type == "photo") {
-	        return React.createElement(PhotoComponent, { type: node.type, url: node["photo-url-500"] });
+	        return React.createElement(
+	          PhotoComponent,
+	          { type: node.type },
+	          node["photo-url-500"]
+	        );
 	      } else if (node.type == "quote") {
 	        return React.createElement(
 	          QuoteComponent,
