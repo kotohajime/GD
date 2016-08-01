@@ -54,6 +54,7 @@
 	function setHeight() {
 	  var html = document.querySelector("html");
 	  var post = document.querySelectorAll(".post");
+	  var minQ = document.querySelectorAll(".min-quote");
 	  var min = document.querySelectorAll(".min");
 	  var screen = html.clientHeight;
 	  //var main = document.getElementById("main");
@@ -69,6 +70,18 @@
 	    mq[o].style.marginTop = ik-20 + "px";
 	    mq[o].style.marginBottom = ik+20 + "px";
 	    */
+	  }
+	  for (var p = 0; p < min.length; p++) {
+	    var minHeight = min[p].clientHeight;
+	    min[p].style.top = screen / 2 - minHeight / 2 + "px";
+	  }
+	  for (var o = 0; o < minQ.length; o++) {
+	    if (minQ[o].kizon) {
+	      console.log("無視するやで");
+	    } else {
+	      minQ[o].innerHTML = minQ[o].innerText;
+	      minQ[o].kizon = true;
+	    }
 	  }
 	}
 	/*
@@ -95,10 +108,13 @@
 	  displayName: "PhotoComponent",
 
 	  render: function render() {
+	    var backSrc = {
+	      backgroundImage: "url(" + this.props.children + ")"
+	    };
 	    return React.createElement(
 	      "div",
 	      { className: "photo post" },
-	      React.createElement("img", { className: "min-photo min", src: this.props.children })
+	      React.createElement("div", { className: "min-photo min", style: backSrc })
 	    );
 	  }
 	});
@@ -174,6 +190,7 @@
 	var renderFunc = function renderFunc(cb) {
 	  ReactDOM.render(React.createElement(TumblrRoot, { data: data, screen: screen }), document.getElementById("main"));
 	  cb();
+	  window.addEventListener("scroll", checkScroll, false);
 	};
 
 	var rsc = function rsc(e, cb, cbcb) {
@@ -196,6 +213,7 @@
 	};
 
 	var requestFunc = function requestFunc() {
+	  window.removeEventListener("scroll", checkScroll, false);
 	  var request = new XMLHttpRequest();
 	  request.open("GET", blogURL + "page/" + pagenumber + "/?format=json", true);
 	  request.addEventListener("readystatechange", function (e) {

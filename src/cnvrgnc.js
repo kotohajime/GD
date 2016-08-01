@@ -6,6 +6,7 @@ var timer = false;
 function setHeight(){
   var html = document.querySelector("html");
   var post = document.querySelectorAll(".post");
+  var minQ = document.querySelectorAll(".min-quote");
   var min = document.querySelectorAll(".min");
   var screen = html.clientHeight;
   //var main = document.getElementById("main");
@@ -22,6 +23,19 @@ function setHeight(){
     mq[o].style.marginBottom = ik+20 + "px";
     */
   }
+  for(var p = 0;p<min.length;p++){
+    var minHeight = min[p].clientHeight;
+    min[p].style.top = screen/2-minHeight/2 + "px";
+  }
+  for(var o = 0;o < minQ.length;o++){
+    if(minQ[o].kizon){
+      console.log("無視するやで");
+    }else{
+      minQ[o].innerHTML = minQ[o].innerText;
+      minQ[o].kizon = true;
+    }
+  }
+  
 }
 /*
 var setHeight = function(){
@@ -45,9 +59,12 @@ window.onload = setHeight;
 
 var PhotoComponent = React.createClass({
   render:function(){
+    var backSrc = {
+      backgroundImage : "url("+this.props.children+")"
+    };
     return(
       <div className="photo post">
-        <img className="min-photo min" src={this.props.children} />
+        <div className="min-photo min" style={backSrc} />
       </div>
     );
   }
@@ -118,6 +135,7 @@ var renderFunc = function(cb){
     document.getElementById("main")
   );
   cb();
+  window.addEventListener("scroll",checkScroll,false);
 };
 
 var rsc = function(e,cb,cbcb){
@@ -141,6 +159,7 @@ var rsc = function(e,cb,cbcb){
 }
 
 var requestFunc = function(){
+  window.removeEventListener("scroll",checkScroll,false);
   var request = new XMLHttpRequest();
   request.open("GET",blogURL+"page/"+pagenumber+"/?format=json",true);
   request.addEventListener("readystatechange",function(e){
