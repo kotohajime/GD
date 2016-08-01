@@ -1,6 +1,29 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
+var screen = document.querySelector("html").clientHeight;
+var timer = false;
 
+function setHeight(){
+  var html = document.querySelector("html");
+  var post = document.querySelectorAll(".post");
+  var min = document.querySelectorAll(".min");
+  var screen = html.clientHeight;
+  //var main = document.getElementById("main");
+  //main.style.marginTop = screen/2-20 + "px";
+  for(var i = 0;i<post.length;i++){
+    post[i].style.height = screen + "px";
+    /*
+    var ki = screen-mq[o].clientHeight;
+    var ik = ki/2;
+    console.log(screen);
+    console.log(mq[o].clientHeight);
+    console.log(ik);
+    mq[o].style.marginTop = ik-20 + "px";
+    mq[o].style.marginBottom = ik+20 + "px";
+    */
+  }
+}
+/*
 var setHeight = function(){
   var html = document.querySelector("html");
   var screen = html.clientHeight;
@@ -18,6 +41,7 @@ var setHeight = function(){
 };
 
 window.onload = setHeight;
+*/
 
 var PhotoComponent = React.createClass({
   render:function(){
@@ -35,13 +59,14 @@ var QuoteComponent = React.createClass({
     var parser = new DOMParser();
     var text = parser.parseFromString(this.props.children,"application/xml");
     */
-    //↑ReactではDOMParserによる脱文字列処理は行えない。怒られる...。
+    //↑ReactではDOMParserによる脱文字列処理は行えない。怒られる...。←DOMParser自体がズレてました...。
     //var text = JSON.parse(this.props.children);
     return(
       <div className="quote post">
         <div className="min-quote min">{this.props.children}</div>
       </div>
     );
+    //この箇所で「screen」と「このmin自体」にアクセスしないといけない。
   }
 });
 
@@ -52,6 +77,7 @@ var PostComponent = React.createClass({
         {this.props.children}
       </div>
     );
+    
   }
 });
 
@@ -77,7 +103,7 @@ var TumblrRoot = React.createClass({
           </PostComponent>
         );
       }
-    });
+    });//this.props.screenのthisはこのままではpostNodesになってしまってるかな？
     return(
       <div className="root">
         {postNodes}
@@ -86,38 +112,60 @@ var TumblrRoot = React.createClass({
   }
 });
 
-var RenderFunc = function(){
+var renderFunc = function(cb){
   ReactDOM.render(
-    <TumblrRoot data={data} />,
+    <TumblrRoot data={data} screen={screen}/>,
     document.getElementById("main")
   );
+  cb();
 };
 
-var requestFunc = function(n){
-  var request = new XMLHttpRequest();
-  request.open("GET",blogURL+"page/"+n+"/?format=json",true);
-  request.onreadystatechange = function(){
-    if(request.readyState == 4 && request.status == 200){
-      var begining = request.response.search("{");
-      var shaveB = request.response.substr(begining);
-      var shaveL = shaveB.substr(0,shaveB.length-1);
-      var happy = JSON.parse(shaveL);
-      console.log(happy);
-      for(var i = 0;i<happy.posts.length;i++){
-        data.push(happy.posts[i]);
-      }
-      console.log(data);
-      pagenumber++;
-      RenderFunc();
+var rsc = function(e,cb,cbcb){
+  if(e.target.readyState == 4 && e.target.status == 200){
+    var begining = e.target.response.search("{");
+    var shaveB = e.target.response.substr(begining);
+    var shaveL = shaveB.substr(0,shaveB.length-1);
+    var happy = JSON.parse(shaveL);
+    console.log(happy);
+    for(var i = 0;i<happy.posts.length;i++){
+      data.push(happy.posts[i]);
     }
-  };
+    console.log(data);
+    pagenumber++;
+    cb(cbcb);
+    //renderFunc(setHeight);
+    
+  }else{
+    console.log(e.target.readyState);
+  }
+}
+
+var requestFunc = function(){
+  var request = new XMLHttpRequest();
+  request.open("GET",blogURL+"page/"+pagenumber+"/?format=json",true);
+  request.addEventListener("readystatechange",function(e){
+    rsc(e,renderFunc,setHeight);
+  });
   request.send(null);
 };
-requestFunc(pagenumber);
+requestFunc();
 
+var checkScroll = function(){
+  if(timer !== false){
+    clearTimeout(timer);
+  }
+  timer = setTimeout(function(){
+    if(document.body.scrollHeight-document.body.scrollTop < 3500){
+      console.log("更新するで");
+      requestFunc();
+    }
+  },300);
+}
+window.addEventListener("scroll",checkScroll,false);
+
+/*
 var button = document.getElementById("update");
 button.addEventListener("click",function(){
-  requestFunc(pagenumber);
+  requestFunc();
 },false);
-
-
+*/
