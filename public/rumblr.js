@@ -49,7 +49,7 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(33);
 	var screen;
-	var post, prevpost, nextpost;
+	var post, prevpost, nextpost, nowpost;
 
 	var PhotoComponent = React.createClass({
 	  displayName: "PhotoComponent",
@@ -172,6 +172,7 @@
 	  }
 	  resizeTimer = setTimeout(function () {
 	    setHeight();
+	    window.scroll(nowpost.offsetLeft, nowpost.offsetTop);
 	  }, 250);
 	}
 	window.addEventListener("resize", forResize, false);
@@ -224,8 +225,10 @@
 	        nextpost = post[i];
 	        if (post[i - 1].offsetTop + 100 > window.scrollY) {
 	          prevpost = post[i - 2];
+	          nowpost = post[i - 1];
 	        } else {
 	          prevpost = post[i - 1];
+	          nowpost = post[i - 1];
 	        }
 	        console.log("↓nextpost");
 	        console.log(nextpost);
