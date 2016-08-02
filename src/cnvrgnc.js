@@ -1,61 +1,7 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
 var screen = document.querySelector("html").clientHeight;
-//var timer = false;
 var post,prevpost,nextpost;
-
-var setHeight = function(){
-  var html = document.querySelector("html");
-  var post = document.querySelectorAll(".post");
-  var minQ = document.querySelectorAll(".min-quote");
-  var min = document.querySelectorAll(".min");
-  var screen = html.clientHeight;
-  //var main = document.getElementById("main");
-  //main.style.marginTop = screen/2-20 + "px";
-  for(var i = 0;i<post.length;i++){
-    post[i].style.height = screen + "px";
-    /*
-    var ki = screen-mq[o].clientHeight;
-    var ik = ki/2;
-    console.log(screen);
-    console.log(mq[o].clientHeight);
-    console.log(ik);
-    mq[o].style.marginTop = ik-20 + "px";
-    mq[o].style.marginBottom = ik+20 + "px";
-    */
-  }
-  for(var p = 0;p<min.length;p++){
-    var minHeight = min[p].clientHeight;
-    min[p].style.top = screen/2-minHeight/2-15 + "px";
-  }
-  for(var o = 0;o < minQ.length;o++){
-    if(minQ[o].kizon){
-      console.log("無視するやで");
-    }else{
-      minQ[o].innerHTML = minQ[o].innerText;
-      minQ[o].kizon = true;
-    }
-  }
-};
-/*
-var setHeight = function(){
-  var html = document.querySelector("html");
-  var screen = html.clientHeight;
-  var post = document.querySelectorAll(".post");
-  for(var i = 0; i<post.length; i++){
-    post[i].style.height = screen+"px";
-  }
-  var mq = document.querySelectorAll(".min");
-  for(var o = 0;o<mq.length;o++){
-  var ki = screen-mq[o].clientHeight;
-  var ik = ki/2;
-  mq[o].style.paddingTop = ik + "px";
-  mq[o].style.paddingBottom = ik + "px";
-  }
-};
-
-window.onload = setHeight;
-*/
 
 var PhotoComponent = React.createClass({
   render:function(){
@@ -72,6 +18,7 @@ var PhotoComponent = React.createClass({
 
 var QuoteComponent = React.createClass({
   render:function(){
+    
     /*
     var parser = new DOMParser();
     var text = parser.parseFromString(this.props.children,"application/xml");
@@ -134,10 +81,30 @@ var renderFunc = function(cb){
     <TumblrRoot data={data} screen={screen}/>,
     document.getElementById("main")
   );
-  cb();
   window.addEventListener("scroll",checkScroll,false);
   post = document.querySelectorAll(".post");
+  cb();
   postGet();
+};
+
+var setHeight = function(){
+  var min = document.querySelectorAll(".min");
+  var minQ = document.querySelectorAll(".min-quote");
+  for(var o = 0;o < minQ.length;o++){
+    if(minQ[o].kizon){
+      console.log("無視するやで");
+    }else{
+      minQ[o].innerHTML = minQ[o].innerText;
+      minQ[o].kizon = true;
+    }
+  }
+  for(var i = 0;i<post.length;i++){
+    post[i].style.height = screen + "px";
+  }
+  for(var p = 0;p<min.length;p++){
+    var minHeight = min[p].clientHeight;
+    min[p].style.top = screen/2-minHeight/2-15 + "px";
+  }
 };
 
 var rsc = function(e,cb,cbcb){
@@ -153,8 +120,6 @@ var rsc = function(e,cb,cbcb){
     console.log(data);
     pagenumber++;
     cb(cbcb);
-    //renderFunc(setHeight);
-    
   }else{
     console.log(e.target.readyState);
   }
@@ -180,10 +145,7 @@ var checkScroll = function(){
 window.addEventListener("scroll",checkScroll,false);
 
 
-var scrollTimer = false;
 var TopTimer = false;
-
-
 function postGet(){
   if(TopTimer != false){
     clearTimeout(TopTimer);
@@ -206,8 +168,9 @@ function postGet(){
     }
   },50);
 }
-window.addEventListener("scroll",postGet,true);
+window.addEventListener("scroll",postGet,false);
 
+var scrollTimer = false;
 function scrollFunc(e){
   if(e.keyCode == 74){
     if(scrollTimer != false){
@@ -216,7 +179,7 @@ function scrollFunc(e){
       for(var i = 0;i<post.length;i++){
         if(post[i].offsetTop > window.scrollY+45){
           nextpost = post[i+1];
-          console.log("↓nextpost");
+          console.log("↓nextpost by [j/74]");
           console.log(nextpost);
           i = post.length + 1;
         }
@@ -253,7 +216,7 @@ function scrollFunc(e){
       for(var i = 0;i<post.length;i++){
         if(post[i].offsetTop > window.scrollY+45){
           prevpost = post[i-2];
-          console.log("↓prevpost");
+          console.log("↓prevpost by [k/75]");
           console.log(prevpost);
           i = post.length + 1;
         }
@@ -285,12 +248,5 @@ function scrollFunc(e){
     smoothScroll();
   }
 }
-
 window.addEventListener("keydown",scrollFunc,false);
 
-/*
-var button = document.getElementById("update");
-button.addEventListener("click",function(){
-  requestFunc();
-},false);
-*/
