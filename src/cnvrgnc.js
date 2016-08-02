@@ -197,32 +197,33 @@ function postGet(){
         }else{
           prevpost = post[i-1];
         }
-        console.log("nextとpostは抑えた");
+        console.log("↓nextpost");
         console.log(nextpost);
+        console.log("↓prevpost");
         console.log(prevpost);
         return false;
       }
     }
-  },100);
+  },50);
 }
 window.addEventListener("scroll",postGet,true);
 
 function scrollFunc(e){
   if(e.keyCode == 74){
-    console.log("j!!");
     if(scrollTimer != false){
+      console.log("ちゃんと"+scrollTimer+"になってるやで");
       clearTimeout(scrollTimer);
       for(var i = 0;i<post.length;i++){
         if(post[i].offsetTop > window.scrollY+45){
           nextpost = post[i+1];
-          console.log("next");
+          console.log("↓nextpost");
           console.log(nextpost);
           i = post.length + 1;
         }
       }
     }
     if(nextpost === undefined){
-      return false
+      return false;
     }
     var twenty = 0;
     var nowleft = window.scrollX;
@@ -236,23 +237,23 @@ function scrollFunc(e){
         if(twenty == 20){
           console.log("下げ終わり");
           scrollTimer = false;
+          console.log("scrollTimerは"+scrollTimer+"だよ");
           return false;
         }
         twenty++;
-        console.log(twenty);
         window.scroll(window.scrollX+fnL,window.scrollY+fnT);
         smoothScroll();
-      },7);
+      },6);
     };
     smoothScroll();
   }else if(e.keyCode == 75){
-    console.log("k!!");
     if(scrollTimer != false){
+      console.log("ちゃんと"+scrollTimer+"になってるやで");
       clearTimeout(scrollTimer);
       for(var i = 0;i<post.length;i++){
         if(post[i].offsetTop > window.scrollY+45){
           prevpost = post[i-2];
-          console.log("post");
+          console.log("↓prevpost");
           console.log(prevpost);
           i = post.length + 1;
         }
@@ -273,13 +274,13 @@ function scrollFunc(e){
         if (twenty == 20) {
           console.log("上げ終わり");
           scrollTimer = false;
+          console.log("scrollTimerは"+scrollTimer+"だよ");
           return false;
         }
         twenty++;
-        console.log(twenty);
         window.scroll(window.scrollX-fnL,window.scrollY-fnT);
         smoothScroll();
-      }, 7);
+      }, 6);
     };
     smoothScroll();
   }
