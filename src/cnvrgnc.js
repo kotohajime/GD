@@ -1,6 +1,6 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
-var screen = document.querySelector("html").clientHeight;
+var screen;
 var post,prevpost,nextpost;
 
 var PhotoComponent = React.createClass({
@@ -88,6 +88,7 @@ var renderFunc = function(cb){
 };
 
 var setHeight = function(){
+  screen = document.querySelector("html").clientHeight;
   var min = document.querySelectorAll(".min");
   var minQ = document.querySelectorAll(".min-quote");
   for(var o = 0;o < minQ.length;o++){
@@ -106,6 +107,18 @@ var setHeight = function(){
     min[p].style.top = screen/2-minHeight/2-15 + "px";
   }
 };
+
+var resizeTimer = false;
+function forResize(){
+  if(resizeTimer != false){
+    clearTimeout(resizeTimer);
+    resizeTimer = false;
+  }
+  resizeTimer = setTimeout(function(){
+    setHeight();
+  },250);
+}
+window.addEventListener("resize",forResize,false);
 
 var rsc = function(e,cb,cbcb){
   if(e.target.readyState == 4 && e.target.status == 200){

@@ -48,7 +48,7 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(33);
-	var screen = document.querySelector("html").clientHeight;
+	var screen;
 	var post, prevpost, nextpost;
 
 	var PhotoComponent = React.createClass({
@@ -144,6 +144,7 @@
 	};
 
 	var setHeight = function setHeight() {
+	  screen = document.querySelector("html").clientHeight;
 	  var min = document.querySelectorAll(".min");
 	  var minQ = document.querySelectorAll(".min-quote");
 	  for (var o = 0; o < minQ.length; o++) {
@@ -162,6 +163,18 @@
 	    min[p].style.top = screen / 2 - minHeight / 2 - 15 + "px";
 	  }
 	};
+
+	var resizeTimer = false;
+	function forResize() {
+	  if (resizeTimer != false) {
+	    clearTimeout(resizeTimer);
+	    resizeTimer = false;
+	  }
+	  resizeTimer = setTimeout(function () {
+	    setHeight();
+	  }, 250);
+	}
+	window.addEventListener("resize", forResize, false);
 
 	var rsc = function rsc(e, cb, cbcb) {
 	  if (e.target.readyState == 4 && e.target.status == 200) {
