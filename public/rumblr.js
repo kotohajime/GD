@@ -49,9 +49,10 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(33);
 	var screen = document.querySelector("html").clientHeight;
-	var timer = false;
+	//var timer = false;
+	var post, prevpost, nextpost;
 
-	function setHeight() {
+	var setHeight = function setHeight() {
 	  var html = document.querySelector("html");
 	  var post = document.querySelectorAll(".post");
 	  var minQ = document.querySelectorAll(".min-quote");
@@ -73,7 +74,7 @@
 	  }
 	  for (var p = 0; p < min.length; p++) {
 	    var minHeight = min[p].clientHeight;
-	    min[p].style.top = screen / 2 - minHeight / 2 + "px";
+	    min[p].style.top = screen / 2 - minHeight / 2 - 15 + "px";
 	  }
 	  for (var o = 0; o < minQ.length; o++) {
 	    if (minQ[o].kizon) {
@@ -83,7 +84,7 @@
 	      minQ[o].kizon = true;
 	    }
 	  }
-	}
+	};
 	/*
 	var setHeight = function(){
 	  var html = document.querySelector("html");
@@ -191,6 +192,8 @@
 	  ReactDOM.render(React.createElement(TumblrRoot, { data: data, screen: screen }), document.getElementById("main"));
 	  cb();
 	  window.addEventListener("scroll", checkScroll, false);
+	  post = document.querySelectorAll(".post");
+	  postGet();
 	};
 
 	var rsc = function rsc(e, cb, cbcb) {
@@ -224,17 +227,118 @@
 	requestFunc();
 
 	var checkScroll = function checkScroll() {
-	  if (timer !== false) {
-	    clearTimeout(timer);
+	  if (document.body.scrollHeight - document.body.scrollTop < 3500) {
+	    console.log("更新するで");
+	    requestFunc();
 	  }
-	  timer = setTimeout(function () {
-	    if (document.body.scrollHeight - document.body.scrollTop < 3500) {
-	      console.log("更新するで");
-	      requestFunc();
-	    }
-	  }, 300);
 	};
 	window.addEventListener("scroll", checkScroll, false);
+
+	var scrollTimer = false;
+	var TopTimer = false;
+
+	function postGet() {
+	  if (TopTimer != false) {
+	    clearTimeout(TopTimer);
+	  }
+	  TopTimer = setTimeout(function () {
+	    for (var i = 0; i < post.length; i++) {
+	      if (post[i].offsetTop > window.scrollY + 45) {
+	        nextpost = post[i];
+	        if (post[i - 1].offsetTop + 100 > window.scrollY) {
+	          prevpost = post[i - 2];
+	        } else {
+	          prevpost = post[i - 1];
+	        }
+	        console.log("nextとpostは抑えた");
+	        console.log(nextpost);
+	        console.log(prevpost);
+	        return false;
+	      }
+	    }
+	  }, 100);
+	}
+	window.addEventListener("scroll", postGet, true);
+
+	function scrollFunc(e) {
+	  if (e.keyCode == 74) {
+	    console.log("j!!");
+	    if (scrollTimer != false) {
+	      clearTimeout(scrollTimer);
+	      for (var i = 0; i < post.length; i++) {
+	        if (post[i].offsetTop > window.scrollY + 45) {
+	          nextpost = post[i + 1];
+	          console.log("next");
+	          console.log(nextpost);
+	          i = post.length + 1;
+	        }
+	      }
+	    }
+	    if (nextpost === undefined) {
+	      return false;
+	    }
+	    var twenty = 0;
+	    var nowleft = window.scrollX;
+	    var nowttop = window.scrollY;
+	    var leftDiff = nextpost.offsetLeft - window.scrollX;
+	    var topDiff = nextpost.offsetTop - window.scrollY;
+	    var fnL = leftDiff / 20;
+	    var fnT = topDiff / 20;
+	    var smoothScroll = function smoothScroll() {
+	      scrollTimer = setTimeout(function () {
+	        if (twenty == 20) {
+	          console.log("下げ終わり");
+	          scrollTimer = false;
+	          return false;
+	        }
+	        twenty++;
+	        console.log(twenty);
+	        window.scroll(window.scrollX + fnL, window.scrollY + fnT);
+	        smoothScroll();
+	      }, 7);
+	    };
+	    smoothScroll();
+	  } else if (e.keyCode == 75) {
+	    console.log("k!!");
+	    if (scrollTimer != false) {
+	      clearTimeout(scrollTimer);
+	      for (var i = 0; i < post.length; i++) {
+	        if (post[i].offsetTop > window.scrollY + 45) {
+	          prevpost = post[i - 2];
+	          console.log("post");
+	          console.log(prevpost);
+	          i = post.length + 1;
+	        }
+	      }
+	    }
+	    if (prevpost === undefined) {
+	      prevpost = post[0];
+	    }
+	    var twenty = 0;
+	    var nowleft = window.scrollX;
+	    var nowtop = window.scrollY;
+	    var leftDiff = window.scrollX - prevpost.offsetLeft;
+	    var topDiiff = window.scrollY - prevpost.offsetTop;
+	    var fnL = leftDiff / 20;
+	    var fnT = topDiiff / 20;
+	    var smoothScroll = function smoothScroll() {
+	      scrollTimer = setTimeout(function () {
+	        if (twenty == 20) {
+	          console.log("上げ終わり");
+	          scrollTimer = false;
+	          return false;
+	        }
+	        twenty++;
+	        console.log(twenty);
+	        window.scroll(window.scrollX - fnL, window.scrollY - fnT);
+	        smoothScroll();
+	      }, 7);
+	    };
+	    smoothScroll();
+	  }
+	}
+
+	window.addEventListener("keydown", scrollFunc, false);
 
 	/*
 	var button = document.getElementById("update");
